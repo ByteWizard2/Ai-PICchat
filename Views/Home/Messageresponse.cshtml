@@ -1,0 +1,46 @@
+
+
+ @model HttpResponseMessage;
+
+@{
+    
+    
+    
+        // Read the content as a byte array and convert it to base64
+        var imageBytes = await Model.Content.ReadAsByteArrayAsync();
+        var imagebase64 = Convert.ToBase64String(imageBytes);
+
+        // Correct image source format without the period after base64
+        var imagesrc = $"data:image/jpeg;base64,{imagebase64}";
+   
+}
+
+@if (Model.IsSuccessStatusCode)
+{
+    <li class="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
+        <svg class="shrink-0 size-[38px] rounded-full" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="38" height="38" rx="6" fill="#2563EB"/>
+            <ellipse cx="19" cy="18.6554" rx="3.75" ry="3.6" fill="white"/>
+        </svg>
+
+        <div class="space-y-3">
+            <img src="@imagesrc" class="h-80 w-80 rounded-md" />          
+        </div>
+    </li>
+}
+else
+{
+    <li class="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
+        <svg class="shrink-0 size-[38px] rounded-full" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="38" height="38" rx="6" fill="#2563EB"/>
+            <ellipse cx="19" cy="18.6554" rx="3.75" ry="3.6" fill="white"/>
+        </svg>
+
+        <div class="space-y-3">
+            <h2>
+                Something Went Wrong
+            </h2>      
+        </div>
+    </li>
+}
+
