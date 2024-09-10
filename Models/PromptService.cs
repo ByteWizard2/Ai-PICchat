@@ -48,7 +48,7 @@ namespace AiChatBot
                 // Check if the response is successful
                 if (!response.IsSuccessStatusCode)
                 {
-                    // Log or handle error if needed
+                    
                     Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
                 }
 
